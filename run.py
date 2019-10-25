@@ -88,4 +88,4 @@ async def on_command_error(ctx, error):
         print(error, type(error))
         await ctx.send(f'{error}\n{type(error)}\nThat information is useful for Zachary. Please make sure he sees it.')
 
-client.run('NjMzMzc1OTI5OTg0NDgzMzI5.XaTEuQ.xK4oG1v-RsDOsuLA_vXSRYadDLs')
+client.run('NjMzMzc1OTI5OTg0NDgzMzI5.Xa2HRg.J64Fzhg2QVDhA5DwAMfFDpB_9pM')
