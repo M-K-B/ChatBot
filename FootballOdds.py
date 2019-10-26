@@ -12,8 +12,9 @@ def dictionaryToString(title, dictInput):
     return output
 def main(input):
     i, arrNom = 0, -1
+    print(odds_json)
     for game in odds_json['data']:
-        if input.lower().find(game['teams'][0].lower()) or input.lower().find(game['teams'][1].lower()):
+        if input.lower().find(game['teams'][0].lower()) != -1 or input.lower().find(game['teams'][1].lower()) != -1:
             arrNom = i
             break
         i += 1
