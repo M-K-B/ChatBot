@@ -2,6 +2,9 @@
 import json
 import requests
 
+## this is the code to get the leagues in england for exmaple the premier league and championship etc.
+## the thing i need is the input i need, when the user types premier league, it only comes with the info for the premier league and vice versa.
+## right now when you run it it comes up with all the all the info and when i get the input, i can implement it on the other codes ive done.
 
 import requests
 
