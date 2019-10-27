@@ -38,7 +38,7 @@ def Eleagues(standing):
 
     print(standing["api"]["leagues"][i]["name"]+ " \n" + standing["api"]["leagues"][i]["type"]+ " \n" + standing["api"]["leagues"][i]["country"]+ " \n" + standing["api"]["leagues"][i]["logo"] )
 
-Eleagues(response.json())
+
 
 
 def Cleagues(Clea):
@@ -55,3 +55,12 @@ def Cleagues(Clea):
     print(Clea["api"]["leagues"][i]["name"]+ " \n" + Clea["api"]["leagues"][i]["type"]+ " \n" + Clea["api"]["leagues"][i]["country"]+ " \n" + Clea["api"]["leagues"][i]["logo"] )
 
 Cleagues(response.json())
+if __name__ == "__main__":
+    print(response.text)
+    # entry = input("***discord entry***")
+    # if entry.lower() == "premier league":
+    #     Eleagues(response.json())
+    # elif entry.lower() == "championship league":
+    #     Cleagues(response.json())
+    # else:
+    #     print("INVALID ENTRY")

@@ -9,24 +9,25 @@ headers = {
     }
 
 response = requests.request("GET", url, headers=headers)
-
-def jprint(obj):
+# print(response.text)
+def jprint(obj, inp):
     # create a formatted string of the Python JSON object
     # text = json.dumps(obj, sort_keys=True, indent=4)
     i = 0
-    k = 0
     for team in obj["api"]["teams"]:
-        if team["venue_name"] == "Anfield":
-            i = k
+        if team["name"].lower() == inp.lower():
             break
-        k = k + 1
+        i = i + 1
 
-
-    print(obj["api"]["teams"][i]["venue_city"]+ " \n" + obj["api"]["teams"][i]["venue_name"] + "\n" + obj["api"]["teams"][i]["venue_city"]+ "\n" + obj["api"]["teams"][i]["logo"]+ "\n" + obj["api"]["teams"][i]["venue_address"])
-
-
-jprint(response.json())
-
+    try:
+        print(obj["api"]["teams"][i]["venue_city"]+ " \n" + obj["api"]["teams"][i]["venue_name"] + "\n" + obj["api"]["teams"][i]["venue_city"]+ "\n" + obj["api"]["teams"][i]["logo"]+ "\n" + obj["api"]["teams"][i]["venue_address"])
+    except:
+        print("Could not find valid team")
+    
+if __name__ == "__main__":
+    entry = input("***discord entry***: ") 
+    jprint(response.json(), entry)
+print("done")
 def ManuPrint(manu):
     # create a formatted string of the Python JSON object
     # text = json.dumps(obj, sort_keys=True, indent=4)
