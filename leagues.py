@@ -41,9 +41,10 @@ def Eleagues(standing):
 
 
 
-def Cleagues(Clea):
+def Cleagues(inp):
     # create a formatted string of the Python JSON object
     # text = json.dumps(obj, sort_keys=True, indent=4)
+    Clea = response.json()
     i = 0
     k = 0
     for cle in Clea["api"]["leagues"]:
@@ -52,11 +53,11 @@ def Cleagues(Clea):
             break
         k = k + 1
 
-    print(Clea["api"]["leagues"][i]["name"]+ " \n" + Clea["api"]["leagues"][i]["type"]+ " \n" + Clea["api"]["leagues"][i]["country"]+ " \n" + Clea["api"]["leagues"][i]["logo"] )
+    return Clea["api"]["leagues"][i]["name"]+ " \n" + Clea["api"]["leagues"][i]["type"]+ " \n" + Clea["api"]["leagues"][i]["country"]+ " \n" + Clea["api"]["leagues"][i]["logo"] 
 
-Cleagues(response.json())
+
 if __name__ == "__main__":
-    print(response.text)
+    Cleagues("Premier League")
     # entry = input("***discord entry***")
     # if entry.lower() == "premier league":
     #     Eleagues(response.json())

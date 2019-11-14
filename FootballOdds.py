@@ -2,6 +2,8 @@ import json
 import requests
 import operator
 
+#Example code obtained from https://the-odds-api.com/ and then the code has been manipulated to fit the desired outcome
+
 def dictionaryToString(title, dictInput):
     output = title
     for key, value in dictInput:
@@ -10,7 +12,7 @@ def dictionaryToString(title, dictInput):
         else:
             output += "\n" + key + "\t" + str(value)
     return output
-def main(input):
+def FootballOdds(input):
     i, arrNom = 0, -1
     print(odds_json)
     for game in odds_json['data']:
@@ -43,7 +45,6 @@ api_key = 'bad3ddea34371000da26af057af03eb4'
 sports_response = requests.get('https://api.the-odds-api.com/v3/sports', params={
     'api_key': api_key
 })
-
 sports_json = json.loads(sports_response.text)
 
 sport_key = 'soccer_epl'
@@ -55,6 +56,7 @@ odds_response = requests.get('https://api.the-odds-api.com/v3/odds', params={
     'mkt': 'h2h' # h2h | spreads | totals
 })
 odds_json = json.loads(odds_response.text)
+print(odds_json)
 if not odds_json['success']:
     print(
         'There was a problem with the odds request:',

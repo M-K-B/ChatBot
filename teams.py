@@ -8,9 +8,10 @@ headers = {
     'x-rapidapi-key': "7ad59fd663msha96194a35d6ad74p11378djsn8d396b9b4c77"
     }
 
-response = requests.request("GET", url, headers=headers)
 # print(response.text)
-def jprint(obj, inp):
+def jprint(inp):
+    response = requests.request("GET", url, headers=headers)
+    obj = response.json()
     # create a formatted string of the Python JSON object
     # text = json.dumps(obj, sort_keys=True, indent=4)
     i = 0
@@ -20,13 +21,13 @@ def jprint(obj, inp):
         i = i + 1
 
     try:
-        print(obj["api"]["teams"][i]["venue_city"]+ " \n" + obj["api"]["teams"][i]["venue_name"] + "\n" + obj["api"]["teams"][i]["venue_city"]+ "\n" + obj["api"]["teams"][i]["logo"]+ "\n" + obj["api"]["teams"][i]["venue_address"])
+        return (obj["api"]["teams"][i]["venue_city"]+ " \n" + obj["api"]["teams"][i]["venue_name"] + "\n" + obj["api"]["teams"][i]["venue_city"]+ "\n" + obj["api"]["teams"][i]["logo"]+ "\n" + obj["api"]["teams"][i]["venue_address"])
     except:
-        print("Could not find valid team")
+        return ("Could not find valid team")
     
 if __name__ == "__main__":
     entry = input("***discord entry***: ") 
-    jprint(response.json(), entry)
+    jprint( entry)
 print("done")
 def ManuPrint(manu):
     # create a formatted string of the Python JSON object

@@ -5,9 +5,9 @@ from datetime import date
 
 def getTeams(teamlist):
     #checking from which league does teamlist belongs to
-    if teamlist=='Prem': #if teamlist belongs to Premier League
+    if teamlist=='prem': #if teamlist belongs to Premier League
         premteamslist = ['Arsenal','AFC Bournemouth','Aston Villa','Brighton & Hove Albion','Burnley','Chelsea','Crystal Palace','Everton','Leicester City','Liverpool','Manchester City','Manchester United','Newcastle United','Norwich City','Sheffield United','Southampton','Tottenham Hotspur','Watford','West Ham United','Wolverhampton Wanderers']
-    elif teamlist=='SerieA': #if teamlist belongs to Serie A
+    elif teamlist=='seriea': #if teamlist belongs to Serie A
         premteamslist=['Roma','Napoli','Juventus','Bologna','Inter Milan','Torino','Atalanta','Cagliari','Genoa','Udinese','Lecce','Sassuolo','Hellas Verona','Brescia','Fiorentina','Parma','AC Milan','Lazio']
     else: #if teamlist contains teams from different leagues       
         premteamslist = teamlist
