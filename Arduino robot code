@@ -1,0 +1,163 @@
+MeUltrasonicSensor ultrasonic_10(10);
+MeEncoderOnBoard Encoder_1(SLOT1);
+MeEncoderOnBoard Encoder_2(SLOT2);
+MeRGBLed rgbled_0(0, 12);
+
+//added
+void main_(){
+      for (int i = 0; i < 12; i++)
+      {
+            rgbled_0.setpin(44);
+            rgbled_0.setColorAt(i, 0, 0, 200);
+            rgbled_0.show();
+      }
+      Activate();
+      Process();
+}
+void Activate(void){
+      MoveForwardUntilWall();
+      TurnRight();             //See function comment
+      MoveForwardUntilWall();
+      TurnRight();
+      MoveForwardSlow();
+      TurnRight();
+}
+void Process(){
+      bool finished = false;
+      bool sideFinished = false;
+      String side = "l";
+      while (!finished)
+      {
+            while (sideFinished)
+            {
+                  MoveForwardSlow();
+                  if(ultrasonic_10.distanceCm() < 90){
+                        sideFinished = true;
+                  }
+            }
+            if(side == "l"){
+                  TurnLeft();
+                  side = "r";
+            }
+            else if (side == "r")
+            {
+                  TurnRight();
+                  side = "l";
+            }
+            if(ultrasonic_10.distanceCm() < 50){
+                  MoveForwardSlow();
+            }
+            else{
+                  finished = true;
+            }
+      }
+}
+void TurnRight(){         //Make this work for 90 degrees
+      move(4, 50);
+      _delay(1);
+}
+void TurnLeft(){         //Make this work for 90 degrees
+      move(3, 50);
+      _delay(1);
+}
+
+void MoveForward(){       
+      move(1, 50);
+      _delay(1);
+}
+void MoveForwardSlow(){   //One car length
+      move(1, 20);
+      _delay(1);
+}
+void MoveForwardUntilWall(){
+      bool endit = false;
+      bool near = false;
+      while (!endit)
+      {
+            if(!near){
+                  MoveForward();
+                  if(ultrasonic_10.distanceCm() < 90){
+                        near = true;
+                  }
+            }
+            else{
+                  MoveForwardSlow();
+                  if(ultrasonic_10.distanceCm() < 50){
+                        endit = true;
+                  }
+            }
+      }
+}
+//added
+
+void isr_process_encoder1(void)
+{
+  if(digitalRead(Encoder_1.getPortB()) == 0){
+    Encoder_1.pulsePosMinus();
+  }else{
+    Encoder_1.pulsePosPlus();
+  }
+}
+void isr_process_encoder2(void)
+{
+  if(digitalRead(Encoder_2.getPortB()) == 0){
+    Encoder_2.pulsePosMinus();
+  }else{
+    Encoder_2.pulsePosPlus();
+  }
+}
+void move(int direction, int speed)
+{
+  int leftSpeed = 0;
+  int rightSpeed = 0;
+  if(direction == 1){
+    leftSpeed = -speed;
+    rightSpeed = speed;      
+
+ ## This is the code that I wrote and It's the speed and direction that the robot moves at and if it encounters an object then it turns left or right at a certain speed.##
+
+  }else if(direction == 2){
+    leftSpeed = speed;
+    rightSpeed = -speed;
+  }else if(direction == 3){
+    leftSpeed = -speed;
+    rightSpeed = -speed;
+  }else if(direction == 4){
+    leftSpeed = speed;
+    rightSpeed = speed;
+  }
+  Encoder_1.setTarPWM(leftSpeed);
+  Encoder_2.setTarPWM(rightSpeed);
+}
+
+void _delay(float seconds) {
+  long endTime = millis() + seconds * 1000;
+  while(millis() < endTime) _loop();
+}
+
+void setup() {
+  TCCR1A = _BV(WGM10);
+  TCCR1B = _BV(CS11) | _BV(WGM12);
+  TCCR2A = _BV(WGM21) | _BV(WGM20);
+  TCCR2B = _BV(CS21);
+  attachInterrupt(Encoder_1.getIntNum(), isr_process_encoder1, RISING);
+  attachInterrupt(Encoder_2.getIntNum(), isr_process_encoder2, RISING);
+  
+  main_();
+  _loop();
+}
+
+void _loop() {
+  Encoder_1.loop();
+  Encoder_2.loop();
+}
+
+void loop() {
+  _loop();
+}
+
+
+
+
+
+
