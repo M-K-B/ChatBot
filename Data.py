@@ -1,16 +1,15 @@
 import pickle
 import os
 class User:
-    def __init__(self, DisplayName, DiscordId, NumberOfRequests, StageSet, Greeting):
+    def __init__(self, DisplayName, DiscordId, NumberOfRequests, Greeting):
         self.displayName = DisplayName
         self.discordId = DiscordId
         self.numberOfRequests = NumberOfRequests
-        self.stage = StageSet
         self.greeting = Greeting
 
     def setGreeting(self, string):
         """Search string to see if any of the commom greeting have been used"""
-        if self.Greeting == 'na':
+        if self.greeting == 'na':
             goodGreetings = ["good morning", "good afternoon", "good evening"]
             for word in goodGreetings:
                 if word in string:
@@ -27,19 +26,14 @@ class User:
                         if word == greet:
                             if "-" in greet:
                                 greet = greet.replace("-", " ")
-                            self.Greeting = greet
+                            self.greeting = greet
             #Going through each word within the string and comparing it to each word in the dictionary
     def numOfReqExceeded(self):
         if self.numberOfRequests > 10:
-            return "Requests exceeded"
+            return True
         else:
-            return "na"
+            return False
 
-class Stage:
-    #Intending to have this work for more than just the greet function but at the moment, it is the only one that is works 
-    #with the stage class
-    def __init__(self, Greet):
-        self.greet = Greet
 class Data:
     def __init__(self):
         self.content = self.__readFile()
@@ -66,11 +60,10 @@ class Data:
             self.content[user.discordId] = user
 
 if __name__ == "__main__":
-    u1 = User("name", "1", 0, 0, "na")
-    u2 = User("name1", "2", 0, Stage("na"), "na")
-    User()
+    u1 = User("name", "4", 0, "na")
+    u2 = User("name1", "5", 0, "na")
     data = Data()
-    data.content[u1.DiscordId] = u1
-    data.content[u2.DiscordId] = u2
+    data.content[u1.discordId] = u1
+    data.content[u2.discordId] = u2
     print(data.content)
     data.writeFile()

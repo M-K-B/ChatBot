@@ -18,7 +18,7 @@ async def on_message(ctx):
     #Used in order to stop the discord bot spamming the chat. ctx = message and message sender info and Client = bot information
     if ctx.author != client.user:
     #End
-        user = User(ctx.author, ctx.author.id, 0, 0, 'na')
+        user = User(ctx.author.name, ctx.author.id, 0, 'na')
         action = functions(user, ctx.content)
         await ctx.channel.send(action.run())
 
@@ -27,7 +27,8 @@ async def on_message(ctx):
 async def on_ready():
     await client.change_presence(status=discord.Status.idle, activity=discord.Game("Status 29"))
     print('Bot is ready.')
-client.run('NjMzMzc1OTI5OTg0NDgzMzI5.XclKAw.JLNvfVMv-4GcWP-ATbaHt3u7xTs')
+client.run('NjMzMzc1OTI5OTg0NDgzMzI5.Xc2YHg.vYdeDlcRgxZnt0lBjxPf4aXRfnM')
 #End
 if __name__ == "__main__":
+    
     pass

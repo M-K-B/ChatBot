@@ -10,7 +10,7 @@ def PlayerPoints(inp):
     (data['elements']) # name of the list
     place, i = -1, 0
     for player in data['elements']:
-        if player['second_name'] == inp:
+        if player['second_name'].lower() == inp:
             place = i
             break
         place = place + 1

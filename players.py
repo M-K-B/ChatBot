@@ -1,6 +1,3 @@
-
-
-
 import requests
 
 url = "https://api-football-v1.p.rapidapi.com/v2/players/squad/85/2018-2019"
